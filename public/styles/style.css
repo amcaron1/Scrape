@@ -1,0 +1,76 @@
+body{
+  background-image: url("../images/flag1.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+      #wrapper {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding: 10px;
+      }
+      #notes {
+        float: right;
+        width: 30%;
+      }
+      textarea, input {
+        display: block;
+        width: 100%;
+        background-color: #FCF5C7;
+      }
+      input {
+        height: 36px;
+        font-size: 24px;
+      }
+      textarea {
+        height: 200px;
+        font-size: 18px;
+      }
+
+.banner {
+    background: red;
+}
+
+.history_logo {
+  max-height: 100px;
+  margin: 10px;
+}
+
+#articles p {
+  margin-bottom: 0px;
+  width: 75%;
+  padding: 0px;
+}
+
+.article {
+  margin-bottom: 20px;
+  border: solid red 2px;
+  border-radius: 10px;
+  padding: 10px;
+  background: #fffacd;
+  /* height: 100%; */
+}
+
+.save_article {
+  float: right;
+}
+
+.delete_article {
+  float: right;
+  margin-left: 10px;
+}
+
+.display_notes {
+  float: right;
+}
+
+#note {
+  margin-bottom: 10px;
+}
+
+.save_note {
+  float: right;
+}
