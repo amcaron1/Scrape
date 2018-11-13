@@ -145,6 +145,7 @@ app.post("/save_note/:id", function(req,res) {
 
   })
 
+ // Route for getting all notes for an article
 app.get("/notes/:id", function(req,res) {
 
   console.log("id: " + req.body.id);
@@ -160,6 +161,23 @@ app.get("/notes/:id", function(req,res) {
       // If an error occurred, log it
       console.log(err);
     })
+})
+
+// Route for deleting an note from the db
+app.get("/delete_note/:article_id/:note_id", function(req,res) {
+
+  db.Note.findOneAndDelete({_id: req.params.note_id})
+    .then(function(response) {
+      return db.Article.findOneAndUpdate({ _id: req.params.article_id }, { $pull:{note: req.params.note_id} }, { new: true });
+    })
+    .then(function(dbArticle) {
+      // If we were able to successfully update an Article, send it back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 })
 
 // Start the server

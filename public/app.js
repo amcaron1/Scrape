@@ -104,8 +104,7 @@ $(document).on("click", ".display_notes", function() {
   $.get("/notes/" + this_id, function(data) {
     if (data.note) {
       for (var i = 0; i < data.note.length; i++){
-        $("#old_notes").append("<div class='note'><p>" + data.note[i].body + "</p><button type='button' class='delete_note'>Delete Note</button><br><h6 hidden>" + data[i]._id + "</h6></div>");
-
+        $("#old_notes").append("<div class='note'><p>" + data.note[i].body + "</p><button type='button' class='delete_note'>Delete Note</button><br><h6 hidden>" + data.note[i]._id + "</h6></div>");
       }
     }
   $("#notesModal").modal("show");
@@ -113,6 +112,15 @@ $(document).on("click", ".display_notes", function() {
   })
 })
 
+// Deletes a saved article
+$(document).on("click", ".delete_note", function() {
+  var note_id = $(this).siblings("h6").text();
+  var article_id = $("#article_id").text();
 
+  // Removes the note from display
+  $(this).parent().remove();
+  $.get("/delete_note/" + article_id + "/" + note_id, function(response) {
+    console.log("response: " + response);
+  })
+})
      
-        
