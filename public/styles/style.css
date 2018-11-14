@@ -6,29 +6,34 @@ body{
   background-size: cover;
   background-attachment: fixed;
 }
-      #wrapper {
-        width: 90%;
-        margin-left: 5%;
-        margin-right: 5%;
-        padding: 10px;
-      }
-      #notes {
-        float: right;
-        width: 30%;
-      }
-      textarea, input {
-        display: block;
-        width: 100%;
-        background-color: #FCF5C7;
-      }
-      input {
-        height: 36px;
-        font-size: 24px;
-      }
-      textarea {
-        height: 200px;
-        font-size: 18px;
-      }
+
+#wrapper {
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 10px;
+}
+
+/* #notes {
+  float: right;
+  width: 30%;
+} */
+
+textarea, input {
+  display: block;
+  width: 100%;
+  /* background-color: #FCF5C7; */
+}
+
+/* input {
+  height: 36px;
+  font-size: 24px;
+} */
+
+textarea {
+  height: 150px;
+  font-size: 18px;
+}
 
 .banner {
     background: red;
