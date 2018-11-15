@@ -27,7 +27,6 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrape";
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
@@ -60,6 +59,8 @@ app.get("/scrape", function(req, res) {
         .attr("href");
       result.summary = $(this).parent().parent().parent()
         .siblings("div.field-name-field-summary").children().children().children("p").text();
+
+      // Push the data for an article to the result array
       result_array.push(result);
       
     });
@@ -156,7 +157,6 @@ app.get("/notes/:id", function(req,res) {
     // ..and populate all of the notes associated with it
     .populate("note")
     .then(function(dbArticle) {
-      console.log("dbArticle: " + dbArticle);
       res.json(dbArticle);
     })
     .catch(function(err) {
@@ -165,7 +165,7 @@ app.get("/notes/:id", function(req,res) {
     })
 })
 
-// Route for deleting an note from the db
+// Route for deleting a note from the db
 app.get("/delete_note/:article_id/:note_id", function(req,res) {
 
   db.Note.findOneAndDelete({_id: req.params.note_id})

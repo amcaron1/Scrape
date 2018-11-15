@@ -81,7 +81,6 @@ $(document).on("click", ".save_note", function() {
   var data = {
     body: note
   };
-  console.log("data:" + data);
  
   $.post("/save_note/" + thisId, data, function(response) {
 
@@ -94,27 +93,42 @@ $(document).on("click", ".save_note", function() {
 // Displays the notes for an article
 $(document).on("click", ".display_notes", function() {
 
+  // Clears the notes modal
   $("#article_id").text("");
   $("#old_notes").empty();
   $("#new_note").val("");
 
+  // Gets the article id from the article's hidden h6
   var this_id = $(this).siblings("h6").text();
+
+  // Stores the article id in the modal's hidden h6
   $("#article_id").text(this_id);
 
+  // Grabs the notes for the article
   $.get("/notes/" + this_id, function(data) {
+
+    // For each one
     if (data.note) {
       for (var i = 0; i < data.note.length; i++){
+
+        // Display the apropos information on the page
+        // The id is hidden in an h6
         $("#old_notes").append("<div class='note'><p>" + data.note[i].body + "</p><button type='button' class='delete_note'>Delete Note</button><br><h6 hidden>" + data.note[i]._id + "</h6></div>");
       }
     }
+  
+  // Show the notes modal
   $("#notesModal").modal("show");
-  console.log("data: " + data);
   })
 })
 
 // Deletes a saved article
 $(document).on("click", ".delete_note", function() {
+
+  // Gets the note id from the modal's hidden h6
   var note_id = $(this).siblings("h6").text();
+
+  // Gets the article id from the modal's hidden h6
   var article_id = $("#article_id").text();
 
   // Removes the note from display

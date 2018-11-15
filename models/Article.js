@@ -16,13 +16,14 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
+  // `summary` is required and of type String
   summary: {
     type: String,
     required: true
   },
-  // `note` is an object that stores a Note id
+  // `note` is an array of objects that stores Note ids
   // The ref property links the ObjectId to the Note model
-  // This allows us to populate the Article with an associated Note
+  // This allows us to populate the Article with its associated Notes
   note: [{
     type: Schema.Types.ObjectId,
     ref: "Note"
