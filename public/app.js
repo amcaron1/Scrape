@@ -1,11 +1,11 @@
 // Scrapes the db for articles and displays them
 $(document).on("click", ".display_scrape", function() {
   // Empties the current articles so that new ones are not appended on to the old ones
-  $("#articles").empty();
+    $("#articles").empty();
 
   // Grabs the articles as a json
-  $.get("/scrape", function(data) {
-  
+    $.get("/scrape", function (data) {
+
     // For each one
     for (var i = 0; i < data.length; i++) {
 

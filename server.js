@@ -33,41 +33,44 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 // Routes
 
 // Route for scraping the db for articles and sending them to the client
-app.get("/scrape", function(req, res) {
+app.get("/scrape", function (req, res) {
 
-  // First, we grab the body of the html with axios
-  axios.get("http://www.historytoday.com/latest/").then(function(response) {
+    // First, we grab the body of the html with axios
+    axios.get("http://www.historytoday.com/latest/").then(function (response) {
 
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
+        // Then, we load that into cheerio and save it to $ for a shorthand selector
+        var $ = cheerio.load(response.data);
 
-    // Creates an array for storing the articles
-    var result_array = [];
-    
-    // Now, we grab every h3 that is a child of class field-name-title, and do the following:
-    $(".field-name-title h3").each(function(i, element) {
+        // Creates an array for storing the articles
+        var result_array = [];
 
-      // Save an empty result object
-      var result = {};
-    
-      // Add the text, the href of every link, and an article summary, and save them as properties of the result object
-      result.title = $(this)
-        .children("a")
-        .text();
-      result.link = "http://www.historytoday.com" + $(this)
-        .children("a")
-        .attr("href");
-      result.summary = $(this).parent().parent().parent()
-        .siblings("div.field-name-field-summary").children().children().children("p").text();
+        // Now, we grab every h3 that is a child of class field-name-title, and do the following:
+        $("article h3").each(function (i, element) {
 
-      // Push the data for an article to the result array
-      result_array.push(result);
-      
+            // Save an empty result object
+            var result = {};
+
+            // Add the text, the href of every link, and an article summary, and save them as properties of the result object
+            result.title = $(this)
+                .children("a")
+                .text();
+            result.link = "http://www.historytoday.com" + $(this)
+                .children("a")
+                .attr("href");
+            result.summary = $(this)
+                .siblings("div.field--name-field-summary").children("p").text();
+
+            // Push the data for an article to the result array
+            result_array.push(result);
+
+        });
+
+        // Return the articles to the client
+        res.json(result_array);
+    })
+    .catch (function (error) {
+        console.log(error);
     });
-
-    // Return the articles to the client
-    res.json(result_array);
-  });
 });
 
 // Route for saving a new Article in the db
