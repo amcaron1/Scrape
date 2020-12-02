@@ -10,7 +10,7 @@ $(document).on("click", ".display_scrape", function() {
     for (var i = 0; i < data.length; i++) {
 
       // Display the apropos information on the page
-      $("#articles").append("<div class='article'><a href=" + data[i].link + " target='_blank'>" + data[i].title + "</a><button type='button' class='save_article'>Save Article</button><br><p>" + data[i].summary + "</p></div>");
+      $("#articles").append("<div class='article'><a href=" + data[i].link + " target='_blank'>" + data[i].title + "</a><button class='btn save_article'>Save Article</button><br><p>" + data[i].summary + "</p></div>");
     }
   })
 })
@@ -57,7 +57,7 @@ $(document).on("click", ".display_saved", function() {
 
       // Display the apropos information on the page
       // The id is hidden in an h6
-      $("#articles").append("<div class='article'><a href=" + data[i].link + " target='_blank' >" + data[i].title + "</a><button type='button' class='delete_article'>Delete Article</button><button type='button' class='display_notes'>Display Notes</button><br><p>" + data[i].summary + "</p><h6 hidden>" + data[i]._id + "</h6></div>");
+      $("#articles").append("<div class='article'><a href=" + data[i].link + " target='_blank' >" + data[i].title + "</a><button class='btn delete_article'>Delete Article</button><button class='btn display_notes'>Display Notes</button><br><p>" + data[i].summary + "</p><h6 hidden>" + data[i]._id + "</h6></div>");
     }
   })
 })
