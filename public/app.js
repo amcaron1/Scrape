@@ -122,7 +122,7 @@ $(document).on("click", ".display_notes", function() {
   })
 })
 
-// Deletes a saved article
+// Deletes a saved note
 $(document).on("click", ".delete_note", function() {
 
   // Gets the note id from the modal's hidden h6
