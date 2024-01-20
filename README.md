@@ -27,12 +27,15 @@ Portfolio Links
 
 Skills
 - HTML
+- CSS
 - Bootstrap
 - JavaScript
 - jQuery
 - Node.js
 - Express.js
+- Axios
 - MongoDB
+- API
 
 Development Instructions
 - Open Bash, type "mongod", and hit enter
