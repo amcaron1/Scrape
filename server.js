@@ -29,7 +29,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrape";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1/scrape";
+//var MONGODB_URI = "mongodb://127.0.0.1/scrape";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 //const client = new MongoClient(MONGODB_URI, {
