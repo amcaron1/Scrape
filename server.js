@@ -1,8 +1,7 @@
-//require('dotenv').config();
+require('dotenv').config();
 var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var { MongoClient, ServerApiVersion } = require('mongodb');
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
@@ -30,35 +29,11 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1/scrape";
-//var MONGODB_URI = "mongodb://127.0.0.1/scrape";
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-//const client = new MongoClient(MONGODB_URI, {
-//    serverApi: {
-//        version: ServerApiVersion.v1,
-//        strict: true,
-//        deprecationErrors: true,
-//    }
-//});
-//async function run() {
-//    try {
-//        // Connect the client to the server	(optional starting in v4.7)
-//        await client.connect();
-//        // Send a ping to confirm a successful connection
-//        await client.db("admin").command({ ping: 1 });
-//        console.log("Pinged your deployment. You successfully connected to MongoDB!");
-//    } finally {
-//        // Ensures that the client will close when you finish/error
-//        await client.close();
-//    }
-//}
-//run().catch(console.dir);
-
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Routes
 
-// Route for scraping the db for articles and sending them to the client
+// Route for scraping the db for articles
 app.get("/scrape", function (req, res) {
 
     // First, we grab the body of the html with axios
@@ -94,9 +69,28 @@ app.get("/scrape", function (req, res) {
         // Return the articles to the client
         res.json(result_array);
     })
-    .catch (function (error) {
+        .catch(function (error) {
+
+        // If an error occurred, send it to the client
         console.log(error);
     });
+});
+
+// Route for getting all Articles from the db
+app.get("/saved_articles", function (req, res) {
+
+    // Grab every document in the Articles collection
+    db.Article.find({})
+        .then(function (dbArticle) {
+
+            // If we were able to successfully find Articles, send them back to the client
+            res.json(dbArticle);
+        })
+        .catch(function (err) {
+
+            // If an error occurred, send it to the client
+            res.json(err);
+        });
 });
 
 // Route for saving a new Article in the db
@@ -139,23 +133,6 @@ app.get("/delete_article/:id", function(req,res) {
     })
 })
 
-// Route for getting all Articles from the db
-app.get("/saved_articles", function(req, res) {
-
-  // Grab every document in the Articles collection
-  db.Article.find({})
-    .then(function(dbArticle) {
-
-      // If we were able to successfully find Articles, send them back to the client
-      res.json(dbArticle);
-    })
-    .catch(function(err) {
-
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
-});
-
 // Route for creating a new note in the db
 app.post("/save_note/:id", function(req,res) {
 
@@ -179,8 +156,6 @@ app.post("/save_note/:id", function(req,res) {
 
  // Route for getting all notes for an article
 app.get("/notes/:id", function(req,res) {
-
-  console.log("id: " + req.body.id);
 
   db.Article.findOne({_id: req.params.id})
     // ..and populate all of the notes associated with it
