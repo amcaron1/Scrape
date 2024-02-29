@@ -15,8 +15,9 @@ body{
 }
 
 textarea, input {
-  display: block;
-  width: 100%;
+    /*Starts on new line and takes up entire width*/
+    display: block;
+    width: 100%;
 }
 
 textarea {

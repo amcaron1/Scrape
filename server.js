@@ -1,12 +1,14 @@
 require('dotenv').config();
+// express does server tasks like loading files and handling HTTP requests
 var express = require("express");
+// morgan allows logging to the console
 var logger = require("morgan");
+// mongoose is a object data manager ODM for MongoDB
 var mongoose = require("mongoose");
-
-// Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
 var axios = require("axios");
+// cheerio is a web scraping tool used for extracting data from a website
 var cheerio = require("cheerio");
 
 // Require all models

@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\models",
     "\\public"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\public\\app.js",
   "PreviewInSolutionExplorer": false
 }
