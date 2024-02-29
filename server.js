@@ -6,7 +6,7 @@ var logger = require("morgan");
 // mongoose is a object data manager ODM for MongoDB
 var mongoose = require("mongoose");
 // Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
+// It works on the client and on the server sending http requests
 var axios = require("axios");
 // cheerio is a web scraping tool used for extracting data from a website
 var cheerio = require("cheerio");
