@@ -2,7 +2,7 @@
 
 Overview
 
-An application that scrapes the “History Today” website for articles and allows users to save the articles to a database along with their notes about the articles.
+An application that scrapes the “World History” website for articles and allows users to save the articles to a database along with their notes about the articles.
 
 Details
 
