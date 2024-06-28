@@ -26,12 +26,23 @@ textarea {
 }
 
 .banner {
-  background: red;
+  background: white;
 }
 
 .history_logo {
   max-height: 100px;
-  margin: 10px;
+  margin: 20px 0px 0px 20px;
+}
+
+.scraper_logo {
+    font-family: Magneto;
+    color: #B52600;
+    font-size: 52px;
+    margin-left: 20px;
+}
+
+.clearfix {
+    clear: both;
 }
 
 #articles p {
@@ -41,11 +52,20 @@ textarea {
 }
 
 .article {
-  margin-bottom: 20px;
-  border: solid red 2px;
-  border-radius: 10px;
-  padding: 10px;
-  background: #fffacd;
+    margin-bottom: 20px;
+    border: solid #B52600 2px;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fffacd;
+}
+
+a {
+    color: #B52600;
+}
+
+a:hover {
+    color: #D12C00;
+    text-decoration: underline;
 }
 
 .save_article {
@@ -80,10 +100,14 @@ textarea {
 }
 
 button {
-    background-color: #2196F3;
+    background-color: #B52600;
     color: white;
 }
 
 button:hover {
-    background: #0b7dda;
+    background: #D12C00;
+}
+
+.nav-button:hover {
+    background-color: #B52600;
 }

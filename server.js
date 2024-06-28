@@ -36,32 +36,29 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 // Routes
 
 // Route for scraping the db for articles
-app.get("/scrape", function (req, res) {
+app.get("/scrape", async function (req, res) {
 
-    // First, we grab the body of the html with axios
-    axios.get("http://www.historytoday.com/latest/").then(function (response) {
-
+    // First, we grab the body of the html with fetch
+    try {
+        const scrapage = await fetch("http://www.worldhistory.org/");
+        const scrapage_text = await scrapage.text();
+        
         // Then, we load that into cheerio and save it to $ for a shorthand selector
-        var $ = cheerio.load(response.data);
+        var $ = cheerio.load(scrapage_text);
 
         // Creates an array for storing the articles
         var result_array = [];
 
-        // Now, we grab every h3 that is a child of class field-name-title, and do the following:
-        $("article h3").each(function (i, element) {
+        // Now, we grab every a element that is a child of class latest_content_items, and do the following:
+        $("div.latest_content_items a").each(function (i, element) {
 
             // Save an empty result object
             var result = {};
 
             // Add the text, the href of every link, and an article summary, and save them as properties of the result object
-            result.title = $(this)
-                .children("a")
-                .text();
-            result.link = "http://www.historytoday.com" + $(this)
-                .children("a")
-                .attr("href");
-            result.summary = $(this)
-                .siblings("div.field--name-field-summary").children("p").text();
+            result.title = $(this).find("div.ci_header").children("h3").text();
+            result.link = "http://www.worldhistory.org/" + $(this).attr("href");
+            result.summary = $(this).find("div.ci_preview").text();
 
             // Push the data for an article to the result array
             result_array.push(result);
@@ -70,12 +67,10 @@ app.get("/scrape", function (req, res) {
 
         // Return the articles to the client
         res.json(result_array);
-    })
-        .catch(function (error) {
-
-        // If an error occurred, send it to the client
-        console.log(error);
-    });
+           
+    } catch (e) {
+         console.log(e);
+    }    
 });
 
 // Route for getting all Articles from the db
